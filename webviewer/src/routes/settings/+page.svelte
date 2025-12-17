@@ -54,11 +54,12 @@
 	async function save() {
 		const pb = await getAuthenticatedPocketBase();
 		let trimmedCourses = [...courses].map((course) => course.trim());
+		console.log('test', trimmedCourses, className.trim());
 		await saveSettings(
 			{
+				...settings,
 				courses: trimmedCourses,
-				className: className.trim(),
-				...settings
+				className: className.trim()
 			}
 			// true
 		);

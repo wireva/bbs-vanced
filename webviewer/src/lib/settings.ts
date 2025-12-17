@@ -44,6 +44,7 @@ export async function getSettings(cookies?: Cookies) {
 }
 
 export async function saveSettings(settings: Settings) {
+  console.log("got", settings)
   const expiryDate = new Date();
   expiryDate.setFullYear(expiryDate.getFullYear() + 10);
   JsCookie.set('settings', JSON.stringify(settings), {
