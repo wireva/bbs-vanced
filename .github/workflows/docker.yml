@@ -21,4 +21,4 @@ jobs:
           context: .
           file: webviewer/Dockerfile
           push: true
-          tags: ghcr.io/niwla23/bbs-vanced:latest
+          tags: ghcr.io/wireva/bbs-vanced:latest
