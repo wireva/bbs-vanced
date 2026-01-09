@@ -123,12 +123,12 @@
 			<LoadingScreen />
 		</div>
 	</main>
-	{#if !$hasPro}
-		<div class="fixed bottom-0 left-0 right-0 p-4 w-full flex">
-			<a href="/getPro" class="w-full bg-primary p-4 rounded-md text-center font-bold text-3xl">
-				Hol dir PRO!
-			</a>
-		</div>
-	{/if}
+	<!-- {#if !$hasPro} -->
+	<!-- 	<div class="fixed bottom-0 left-0 right-0 p-4 w-full flex"> -->
+	<!-- 		<a href="/getPro" class="w-full bg-primary p-4 rounded-md text-center font-bold text-3xl"> -->
+	<!-- 			Hol dir PRO! -->
+	<!-- 		</a> -->
+	<!-- 	</div> -->
+	<!-- {/if} -->
 	<!-- <Menu /> -->
 </div>

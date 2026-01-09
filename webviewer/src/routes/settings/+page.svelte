@@ -47,12 +47,13 @@
 
 		const fetchedTheme = localStorage.getItem('theme');
 		if (fetchedTheme) theme = fetchedTheme;
-		const pb = await getAuthenticatedPocketBase();
-		notificationEmail = pb.authStore.model.notificationEmail;
+		if (hasPro) {
+			const pb = await getAuthenticatedPocketBase();
+			notificationEmail = pb.authStore.model.notificationEmail;
+		}
 	}
 
 	async function save() {
-		const pb = await getAuthenticatedPocketBase();
 		let trimmedCourses = [...courses].map((course) => course.trim());
 		console.log('test', trimmedCourses, className.trim());
 		await saveSettings(
@@ -64,7 +65,10 @@
 			// true
 		);
 
-		await pb.collection('users').update(pb.authStore.model.id, { notificationEmail });
+		if (hasPro) {
+			const pb = await getAuthenticatedPocketBase();
+			await pb.collection('users').update(pb.authStore.model.id, { notificationEmail });
+		}
 		localStorage.setItem('theme', theme);
 		document.documentElement.dataset.theme = theme;
 		goto('/');
@@ -131,7 +135,9 @@
 			<p>Du verwendest BBS Vanced PRO 😀</p>
 		{:else}
 			<p>Du hast kein PRO 😪</p>
-			<button class="w-full bg-primary p-2 rounded-md">PRO kaufen</button>
+			<a href="/activatePro">
+				<button class="w-full bg-primary p-2 rounded-md">PRO kostenlos freischalten</button>
+			</a>
 		{/if}
 
 		<label class="block pb-2">
@@ -183,20 +189,45 @@
 		</h2>
 		<small>URLs kopieren und in deiner Kalenderapp als ICal Kalender hinzufügen</small>
 
-		<label class="block pt-2 pb-2">
-			<span class="font-light">Stundenplan ICal URL</span>
-			<input
-				class="w-full bg-dark border border-colborder p-2 rounded-md font-thin"
-				value={icalTimetableUrl}
-			/>
-		</label>
-		<label class="block pb-2">
-			<span class="font-light">Arbeiten ICal URL</span>
-			<input
-				class="w-full bg-dark border border-colborder p-2 rounded-md font-thin"
-				value={icalExamsUrl}
-			/>
-		</label>
+		<div class="flex justify-between gap-4 pb-2 items-end">
+			<label class="block w-full">
+				<span class="font-light">Stundenplan ICal URL</span>
+				<input
+					class="w-full bg-dark border border-colborder p-2 rounded-md font-thin"
+					value={icalTimetableUrl}
+				/>
+			</label>
+			<a
+				class="flex h-10"
+				href="https://calendar.google.com/calendar/render?cid={icalTimetableUrl
+					.replace('http://', 'webcal://')
+					.replace('https://', 'webcal://')}"
+			>
+				<UiButton appearance="normal" class="text-nowrap !p-2 h-full">
+					Zu Google Calendar hinzufügen
+				</UiButton>
+			</a>
+		</div>
+
+		<div class="flex justify-between gap-4 pb-2 items-end">
+			<label class="block w-full">
+				<span class="font-light">Arbeiten ICal URL</span>
+				<input
+					class="w-full bg-dark border border-colborder p-2 rounded-md font-thin"
+					value={icalExamsUrl}
+				/>
+			</label>
+			<a
+				class="flex h-10"
+				href="https://calendar.google.com/calendar/render?cid={icalExamsUrl
+					.replace('http://', 'webcal://')
+					.replace('https://', 'webcal://')}"
+			>
+				<UiButton appearance="normal" class="text-nowrap !p-2 h-full">
+					Zu Google Calendar hinzufügen
+				</UiButton>
+			</a>
+		</div>
 
 		<h2 class="text-xl pt-2">Deine Fächer / Kurse</h2>
 		<UiButton appearance="normal" class="mb-2" on:click={() => goto('/settings/updateCourses')}>

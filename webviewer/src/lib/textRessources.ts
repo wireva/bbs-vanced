@@ -66,7 +66,13 @@ export const hourStartTimesRaw = [
   [13, 25],
   [14, 10],
   [15, 5],
-  [15, 50]
+  [15, 50],
+  [17, 0],
+  [18, 0],
+  [19, 0],
+  [20, 0],
+  [21, 0],
+  [22, 0]
 ]
 
 export const hourEndTimesRaw = [
@@ -80,7 +86,13 @@ export const hourEndTimesRaw = [
   [14, 10],
   [14, 55],
   [15, 50],
-  [16, 35]
+  [16, 35],
+  [18, 0],
+  [19, 0],
+  [20, 0],
+  [21, 0],
+  [22, 0],
+  [23, 0],
 ]
 
 export const choosenEmoji = availableEmojis[Math.floor(Math.random() * availableEmojis.length)];

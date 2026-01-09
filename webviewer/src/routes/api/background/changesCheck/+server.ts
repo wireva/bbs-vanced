@@ -80,7 +80,7 @@ export const POST: RequestHandler = async (event) => {
   const redis = await createRedis()
   console.log("[changeDetect] got access to redis and the backend")
 
-  const users = await pb.collection("users").getFullList({ filter: "proKey != '' && settings != null" })
+  const users = await pb.collection("users").getFullList({ filter: "settings != null" })
   for (const user of users) {
     const changesFoundForUser = []
 

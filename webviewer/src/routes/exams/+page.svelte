@@ -12,15 +12,15 @@
 	const animate = (n) => fly(n, { y: -100 });
 
 	onMount(async () => {
-		if ($hasPro) {
-			const settings = await getSettings();
-			const data: Exam[] = await getExamsClient(settings.className);
-			const cutoffDate = new Date();
-			cutoffDate.setDate(cutoffDate.getDate() - 1);
-			exams = data
-				.filter((v) => new Date(v.date).getTime() > cutoffDate.getTime())
-				.filter((v) => settings?.courses.includes(v.subject) || v.subject == '-all-');
-		}
+		// if ($hasPro) {
+		const settings = await getSettings();
+		const data: Exam[] = await getExamsClient(settings.className);
+		const cutoffDate = new Date();
+		cutoffDate.setDate(cutoffDate.getDate() - 1);
+		exams = data
+			.filter((v) => new Date(v.date).getTime() > cutoffDate.getTime())
+			.filter((v) => settings?.courses.includes(v.subject) || v.subject == '-all-');
+		// }
 	});
 
 	function backgroundColor(exam: Exam) {
@@ -54,25 +54,25 @@
 			</div>
 		{/each}
 
-		{#if $hasPro}
-			<div class="flex-grow rounded-md border border-colborder shadow-sm shadow-black p-2">
-				ACHTUNG: Hier werden nur Klausuren angezeigt, die von Schülern eingetragen worden sind! Du
-				kannst weitere über Menü > Klausur eintragen hinzufügen.
-			</div>
-		{:else}
-			<div class="flex-grow rounded-md border border-colborder shadow-sm shadow-black p-2">
-				Wäre es nicht schön wenn du hier eine Übersicht über deine anstehenden Klausuren sehen
-				könntest?
-			</div>
-			<div class="flex-grow rounded-md border border-colborder shadow-sm shadow-black p-2">
-				Alles was dazu fehlt ist das du BBS Vanced PRO kaufst.
-				<a
-					class="bg-primary text-on-primary p-4 w-full block text-center rounded-md"
-					href="/getPro"
-				>
-					Erzähl mir mehr
-				</a>
-			</div>
-		{/if}
+		<!-- {#if $hasPro} -->
+		<div class="flex-grow rounded-md border border-colborder shadow-sm shadow-black p-2">
+			ACHTUNG: Hier werden nur Klausuren angezeigt, die von Schülern eingetragen worden sind! Du
+			kannst weitere über Menü > Klausur eintragen hinzufügen.
+		</div>
+		<!-- {:else} -->
+		<!-- 	<div class="flex-grow rounded-md border border-colborder shadow-sm shadow-black p-2"> -->
+		<!-- 		Wäre es nicht schön wenn du hier eine Übersicht über deine anstehenden Klausuren sehen -->
+		<!-- 		könntest? -->
+		<!-- 	</div> -->
+		<!-- 	<div class="flex-grow rounded-md border border-colborder shadow-sm shadow-black p-2"> -->
+		<!-- 		Alles was dazu fehlt ist das du BBS Vanced PRO kaufst. -->
+		<!-- 		<a -->
+		<!-- 			class="bg-primary text-on-primary p-4 w-full block text-center rounded-md" -->
+		<!-- 			href="/getPro" -->
+		<!-- 		> -->
+		<!-- 			Erzähl mir mehr -->
+		<!-- 		</a> -->
+		<!-- 	</div> -->
+		<!-- {/if} -->
 	</main>
 </div>

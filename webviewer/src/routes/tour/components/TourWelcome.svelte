@@ -23,14 +23,14 @@
 	async function proLogin() {
 		const pb = await getAuthenticatedPocketBase();
 		const user = await pb.collection('users').getOne(pb.authStore.model!.id);
-		if (user.proKey && user.proKey != '') {
-			localStorage.setItem('hasPro', 'true');
-			let settings = await getSettings();
-			await saveSettings(settings);
-			window.location.pathname = '/';
-		} else {
-			Swal.fire('Netter Versuch, aber du hast kein PRO :(');
-		}
+		// if (user.proKey && user.proKey != '' ) {
+		localStorage.setItem('hasPro', 'true');
+		let settings = await getSettings();
+		await saveSettings(settings);
+		window.location.pathname = '/';
+		// } else {
+		// 	Swal.fire('Netter Versuch, aber du hast kein PRO :(');
+		// }
 	}
 </script>
 
@@ -66,7 +66,7 @@
 				/>
 			</label>
 			<button class="bg-dark p-4 rounded-md w-full mb-2" on:click={proLogin}>
-				Ich hab PRO, anmelden
+				Ich hab mich schonmal angemeldet
 			</button>
 			<button
 				class="{$grade != 0 && $className != ''

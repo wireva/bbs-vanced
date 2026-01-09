@@ -8,7 +8,7 @@
 	<main class="max-w-4xl w-full">
 		<TopBar title="Vanced PRO" showBack />
 		<div class="flex flex-col gap-2 pt-12">
-			<h1>Hol dir jetzt die PRO Version!</h1>
+			<h1>Hol dir jetzt die kostenlose PRO Version!</h1>
 
 			<div class="bg-dark p-2 rounded-md flex items-center h-24">
 				<Icon icon="mdi:list-box" class="flex-shrink-0 w-12 text-3xl pr-2 text-primary" />
@@ -86,14 +86,15 @@
 				<div class="h-16 bg-gradient-to-b from-transparent to-darkest" />
 				<div class="bg-darkest flex flex-col gap-2 p-2 pt-0">
 					<a
-						href="/activatePro/buy"
+						href="/activatePro"
 						class="bg-primary text-on-primary text-center font-bold p-4 rounded-md mt-2"
 					>
-						Jetzt kaufen - {Number(env.PUBLIC_PRO_PRICE).toFixed(2)}€
+						<!-- Jetzt kaufen - {Number(env.PUBLIC_PRO_PRICE).toFixed(2)}€ -->
+						Jetzt kostenlos freischalten
 					</a>
-					<a class="bg-dark rounded-md p-4 text-center" href="/activatePro">
-						Ich habe gekauft, jetzt aktivieren
-					</a>
+					<!-- <a class="bg-dark rounded-md p-4 text-center" href="/activatePro"> -->
+					<!-- 	Ich habe gekauft, jetzt aktivieren -->
+					<!-- </a> -->
 				</div>
 			</div>
 		</div>

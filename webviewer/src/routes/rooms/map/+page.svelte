@@ -232,10 +232,10 @@
 	}
 
 	async function loadData() {
-		if (!$hasPro) {
-			isLoading = false;
-			return;
-		}
+		// if (!$hasPro) {
+		// 	isLoading = false;
+		// 	return;
+		// }
 		isLoading = true;
 		roomsData = await getRoomsForDateClient(date);
 		isLoading = false;
@@ -310,10 +310,10 @@
 		svgElement.innerHTML = `<g transform="rotate(-82, 0, 0)">${schoolPlan}</g>`;
 
 		leaflet.svgOverlay(svgElement, planBound, { opacity: 0.99, interactive: true }).addTo(map);
-		if (!$hasPro) {
-			Swal.fire('PRO Funktion', 'Mit PRO kannst du sehen welche Klasse wann in welchem Raum ist');
-			return;
-		}
+		// if (!$hasPro) {
+		// 	Swal.fire('PRO Funktion', 'Mit PRO kannst du sehen welche Klasse wann in welchem Raum ist');
+		// 	return;
+		// }
 
 		roomMarkerGroup = leaflet.layerGroup();
 		roomMarkerGroup.addTo(map);
