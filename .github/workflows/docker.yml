@@ -24,4 +24,4 @@ jobs:
           tags: ghcr.io/wireva/bbs-vanced:latest
 
       - name: Deploy
-        run: "curl -H 'Token: ${{ secrets.deploy_webhook_token }}' {{ secrets.deploy_webhook_url }}"
+        run: "curl -H 'Token: ${{ secrets.deploy_webhook_token }}' ${{ secrets.deploy_webhook_url }}"
