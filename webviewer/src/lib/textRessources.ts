@@ -1,3 +1,4 @@
+
 export const availableEmojis = ['🤮', '😭', '😳', '🥲', '🥱', '🥺', '🫤', '😥', '😑', '🏳️‍⚧️', '🏳️‍🌈', '🚩'];
 export const availableMotd = [
   'Heute wird wieder ein Kacktag.',
@@ -114,17 +115,33 @@ export const hourEndTimesRaw = [
   [23, 0],
 ]
 
-async function getDateBasedIndex(maxIndex: number) {
+// Source - https://stackoverflow.com/a/8831937
+// Posted by Barak, modified by community. See post 'Timeline' for change history
+// Retrieved 2026-05-11, License - CC BY-SA 4.0
+
+/**
+ * Returns a hash code from a string
+ * @param  {String} str The string to hash.
+ * @return {Number}    A 32bit integer
+ * @see http://werxltd.com/wp/2010/05/13/javascript-implementation-of-javas-string-hashcode-method/
+ */
+function hashCode(str: string): number {
+    let hash = 0;
+    for (let i = 0, len = str.length; i < len; i++) {
+        let chr = str.charCodeAt(i);
+        hash = (hash << 5) - hash + chr;
+        hash |= 0; // Convert to 32bit integer
+    }
+    return hash;
+}
+
+
+function getDateBasedIndex(maxIndex: number) {
   console.log("yippee");
   const today = new Date();
   // this gives us a new deterministic index every two hours
-  const hash = await crypto.subtle.digest('SHA-256', new Uint8Array([today.getUTCDate(), today.getUTCMonth(), today.getUTCFullYear(), Math.floor(today.getUTCHours() / 2)]))
-  const view  = new Uint8Array(hash);  
+  const sum = Math.abs(hashCode([today.getUTCDate(), today.getUTCMonth(), today.getUTCFullYear(), Math.floor(today.getUTCHours() / 2)].join())) % 32;
 
-  let sum = 0;
-  for (let el of view) {
-    sum += el;
-  }
   console.log("todays magic num",sum);
   console.log("todays index", sum % maxIndex, "max was", maxIndex)
 
@@ -132,5 +149,5 @@ async function getDateBasedIndex(maxIndex: number) {
 }
 
 export const choosenEmoji = availableEmojis[Math.floor(Math.random() * availableEmojis.length)];
-export const choosenMotd = new Date().getHours() > 1 && new Date().getHours() < 4 ? "Digga bitte geh schlafen einfach" : availableMotd[await getDateBasedIndex(availableMotd.length)];
+export const choosenMotd = new Date().getHours() > 1 && new Date().getHours() < 4 ? "Digga bitte geh schlafen einfach" : availableMotd[getDateBasedIndex(availableMotd.length)];
 
