@@ -1,10 +1,9 @@
-export const availableEmojis = ['🤮', '😭', '😳', '🥲', '🥱', '🥺', '🫤', '😥', '😑'];
+export const availableEmojis = ['🤮', '😭', '😳', '🥲', '🥱', '🥺', '🫤', '😥', '😑', '🏳️‍⚧️', '🏳️‍🌈', '🚩'];
 export const availableMotd = [
   'Heute wird wieder ein Kacktag.',
   'Tipp: Bis zum dritten Tag gibt es keine Attestpflicht',
   'Manchmal hört ein Schultag auch früher auf als im Stundenplan',
   'Pass auf! Schulprojekte sind oft Zeitverschwendung',
-  'Nicht alle DLCs bringen dich weiter. Wähle sie weise.',
   'Setze deine Energiepunkte sinnvoll ein.',
   'Hinweis: Taktisches Überspringen von Stunden wirkt sich positiv auf dein HP aus',
   'Achtung! Hausaufgaben sind Side Quests. Verschwende nicht zu viel Zeit mit ihnen.',
@@ -19,7 +18,6 @@ export const availableMotd = [
   "Remember, the rule isn't to not do it, the rule is to not get caught",
   'I don’t know, can you use the bathroom?',
   'Achtung: Ab Level 25 endet die Low-Level-Protection und du musst du deine Krankenversicherungsbeiträge selbst bezahlen.',
-  'Wenn du die ganze Woche grinden willst, caste mit einem Heiler den Zauber "gelber Schein".',
   'Die Enten im Park sind kostenlos.',
   'Kranplätze müssen verdichtet sein.',
   'Trete aus der Kirche aus, um Kirchensteuer zu sparen',
@@ -34,6 +32,11 @@ export const availableMotd = [
   'Schlaf > Schule.',
   'Der Unterricht ist zum Essen und auf Klo gehen. Flasche auffüllen auch. Verschwende nicht die Pause damit.',
   'Antworten ausdenken > Lernen',
+  'Merz Leck Eier 🥚',
+  'Siamo tutti anitfascisti',
+  'Free Palestine 🇵🇸',
+  'Jugend, Zukunft, Sozialismus',
+  'Liebe Grüße von Lea',
   'Ach mein, dein... Das sind doch bürgerliche Kategorien',
   'Wer anderen eine Grube gräbt, braucht eine Baugenehmigung',
   'We don’t make Mistakes, we have Happy Accident’s. - Bob Ross',
@@ -47,8 +50,12 @@ export const availableMotd = [
   'Dit is ‘ne freundliche Diktatur hier.',
   'I just keep trying things and it keeps working somehow',
   'Frühstück!',
-  '🏳️‍⚧️🏳️‍⚧️🏳️‍⚧️',
   '🏳️‍🌈🏳️‍🌈🏳️‍🌈',
+  'Hurra diese Welt geht unter',
+  'Kein Gott, Kein Staat, Kein Patriarchat',
+  'Etwas mit Heimatministerium kann für mich keine Heimat sein',
+  'Wir träumen von Friedenm, doch erst müssen wir gewinnen!',
+  '161'
 ];
 export const hourTimes = {
   start: ["-", "7:55", "8:40", "9:45", "10:30", "11:35", "12:20", "13:25", "14:10", "15:05", "15:50"],
@@ -95,6 +102,23 @@ export const hourEndTimesRaw = [
   [23, 0],
 ]
 
+async function getDateBasedIndex(maxIndex: number) {
+  console.log("yippee");
+  const today = new Date();
+  // this gives us a new deterministic index every two hours
+  const hash = await crypto.subtle.digest('SHA-256', new Uint8Array([today.getUTCDate(), today.getUTCMonth(), today.getUTCFullYear(), Math.floor(today.getUTCHours() / 2)]))
+  const view  = new Uint8Array(hash);  
+
+  let sum = 0;
+  for (let el of view) {
+    sum += el;
+  }
+  console.log("todays magic num",sum);
+  console.log("todays index", sum % maxIndex, "max was", maxIndex)
+
+  return sum % maxIndex
+}
+
 export const choosenEmoji = availableEmojis[Math.floor(Math.random() * availableEmojis.length)];
-export const choosenMotd = availableMotd[Math.floor(Math.random() * availableMotd.length)];
+export const choosenMotd = new Date().getHours() > 1 && new Date().getHours() < 4 ? "Digga bitte geh schlafen einfach" : availableMotd[await getDateBasedIndex(availableMotd.length)];
 

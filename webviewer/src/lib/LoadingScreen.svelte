@@ -15,7 +15,7 @@
 			<div class="loading-dot" id="dot3" />
 		</div>
 		<small class="text-xs text-muted pt-4">
-			{choosenMotd}
+			made by lea :)
 		</small>
 	</div>
 </div>

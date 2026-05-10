@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Icon from '@iconify/svelte';
-	import { choosenEmoji } from './textRessources';
+	import { choosenEmoji, choosenMotd } from './textRessources';
 	import Menu from './Menu.svelte';
 	import UiButton from './UiButton.svelte';
 
@@ -25,7 +25,7 @@
 			{/if}
 			<div>
 				<h1 class="font-bold text-2xl">{title}</h1>
-				<h2 class="text-muted text-xs">By Lea Lohrie</h2>
+				<h2 class="text-muted text-xs">{choosenMotd}</h2>
 			</div>
 		</div>
 		<div class="flex gap-1">

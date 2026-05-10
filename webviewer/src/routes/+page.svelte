@@ -28,7 +28,7 @@
 	let lastLoadTime = new Date().getTime();
 	let settings: Settings;
 	let showSelectPopup = false;
-	let timetableName = 'Start';
+	let timetableName = 'Stundenplan';
 
 	const animate = (n) => scale(n, {});
 
@@ -95,7 +95,7 @@
 			const data = await response.json();
 			loadNormal(true, { className: data.className, courses: data.courses });
 		} else {
-			timetableName = 'Deins';
+			timetableName = 'Stundenplan';
 			loadNormal(true);
 		}
 	}
@@ -137,7 +137,7 @@
 
 <div class="w-full flex justify-center p-4">
 	<main class="max-w-4xl w-full">
-		<TopBar title={timetableName.slice(0, 10)}>
+		<TopBar title={timetableName.slice(0, 12)}>
 			<UiButton on:click={() => (showSelectPopup = true)} class="px-2 text-xs">
 				<Icon icon="mingcute:eye-line" class="h-6 w-6" />
 			</UiButton>
