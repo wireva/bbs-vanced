@@ -55,7 +55,19 @@ export const availableMotd = [
   'Kein Gott, Kein Staat, Kein Patriarchat',
   'Etwas mit Heimatministerium kann für mich keine Heimat sein',
   'Wir träumen von Friedenm, doch erst müssen wir gewinnen!',
-  '161'
+  '161',
+  'Drei Schüsse in die Luft',
+  'Bang Bang Bang',
+  'Die Revolution oder Berlin Tag und Nacht?',
+  'Ding Dong. Es klingelt. Ich gehe an die Tür und öffne. Vor meiner Nase steht ein Känguru.',
+  'Diese französischen Bulldoggen fliegen nicht so gut, die verhalten sich aerodynamisch ungeschickt.',
+  'Du denkst vielleicht du bist hart, aber ich bin Herta!',
+  'Immer noch besser als bei euch zu sein',
+  'Oh da gibt es einen Unterschied. Die einen zünden Ausländer an, die anderen Autos.',
+  'Schon mal darüber nachgedacht, dass es von "uninformiert" kein langer Weg zu "uniformiert" ist?',
+  'Man darf jetzt nicht alles so schlecht reden, wie es wirklich war.',
+  'Das ist alles ein soziales Experiment hier',
+  'Bitte wählt zumindest nicht die AfD digga'
 ];
 export const hourTimes = {
   start: ["-", "7:55", "8:40", "9:45", "10:30", "11:35", "12:20", "13:25", "14:10", "15:05", "15:50"],
