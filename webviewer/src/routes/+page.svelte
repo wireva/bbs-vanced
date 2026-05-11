@@ -28,7 +28,7 @@
 	let lastLoadTime = new Date().getTime();
 	let settings: Settings;
 	let showSelectPopup = false;
-	let timetableName = 'Stundenplan';
+	let timetableName = 'Start';
 
 	const animate = (n) => scale(n, {});
 
@@ -95,7 +95,7 @@
 			const data = await response.json();
 			loadNormal(true, { className: data.className, courses: data.courses });
 		} else {
-			timetableName = 'Stundenplan';
+			timetableName = 'Start';
 			loadNormal(true);
 		}
 	}
@@ -149,7 +149,7 @@
 			</UiButton>
 		</TopBar>
 
-		<div class="flex flex-col gap-2 pt-12">
+		<div class="flex flex-col gap-2 pt-16">
 			{#if exams}
 				{#each filteredTimetable as [day, slots] (day)}
 					<div class="py-2 flex-grow" transition:animate>
