@@ -75,53 +75,55 @@
 	$: endDate = endTime ? convertTimeToDate(endTime, date) : null;
 </script>
 
-<div
-	class="component-timeslot {backgroundColor} rounded-md border border-colborder shadow-sm shadow-black flex items-center p-2 relative transform active:scale-[99%] transition-all ease-out"
-	use:press={{ timeframe: 500, triggerBeforeFinished: true }}
-	on:press
->
-	{#if !weekView}
-		<div class="self-stretch w-20 flex flex-col justify-between items-center pr-2">
-			<p class="text-muted text-xs">{$hasPro ? startTime : ''}</p>
-			<p class="w-min text-primary text-3xl tracking-tight font-bold">{hours.join('/')}</p>
-			<p class="text-muted text-xs">{$hasPro ? endTime : ''}</p>
+<a href="{ timeSlot[0].room == 'schulstreikgegenwehrpflicht.com' ? 'https://schulstreikgegenwehrpflicht.com' : ''}">
+	<div
+		class="component-timeslot {backgroundColor} rounded-md border border-colborder shadow-sm shadow-black flex items-center p-2 relative transform active:scale-[99%] transition-all ease-out"
+		use:press={{ timeframe: 500, triggerBeforeFinished: true }}
+		on:press
+	>
+		{#if !weekView}
+			<div class="self-stretch w-20 flex flex-col justify-between items-center pr-2">
+				<p class="text-muted text-xs">{$hasPro ? startTime : ''}</p>
+				<p class="w-min text-primary text-3xl tracking-tight font-bold">{hours.join('/')}</p>
+				<p class="text-muted text-xs">{$hasPro ? endTime : ''}</p>
+			</div>
+		{/if}
+		<div>
+			{#if timeSlot.length > 0}
+				{#each timeSlot as lesson}
+					<p class="">{@html lesson.subject}</p>
+					<p class="text-muted">{@html formatContent(lesson.teacher)}</p>
+					<p class="text-muted">{@html formatContent(lesson.room)}</p>
+					{#if lesson.exam}<p class="text-red-500">
+							{@html lesson.exam}
+							<Icon icon="material-symbols:verified" class="h-6 w-6 inline" />
+						</p>{/if}
+					{#if externalExam}
+						<p class={externalExam.type == 'klausur' ? 'text-red-500' : 'text-blue-500'}>
+							{externalExam.topic}
+							<Icon icon="material-symbols:supervised-user-circle" class="h-6 w-6 inline" />
+						</p>
+					{/if}
+				{/each}
+			{:else}
+				<p class="text-muted">Frei :)</p>
+			{/if}
 		</div>
-	{/if}
-	<div>
-		{#if timeSlot.length > 0}
-			{#each timeSlot as lesson}
-				<p class="">{@html lesson.subject}</p>
-				<p class="text-muted">{@html formatContent(lesson.teacher)}</p>
-				<p class="text-muted">{@html formatContent(lesson.room)}</p>
-				{#if lesson.exam}<p class="text-red-500">
-						{@html lesson.exam}
-						<Icon icon="material-symbols:verified" class="h-6 w-6 inline" />
-					</p>{/if}
-				{#if externalExam}
-					<p class={externalExam.type == 'klausur' ? 'text-red-500' : 'text-blue-500'}>
-						{externalExam.topic}
-						<Icon icon="material-symbols:supervised-user-circle" class="h-6 w-6 inline" />
-					</p>
-				{/if}
-			{/each}
-		{:else}
-			<p class="text-muted">Frei :)</p>
+		{#if !weekView && isTimeslotActive(startDate, endDate)}
+			<div
+				class="absolute bottom-0 right-0 p-1 px-4 rounded-tl-lg flex items-center gap-1 text-sm border-t border-l border-colborder"
+			>
+				<Icon icon="material-symbols:alarm" class="" />
+				<p>Endet {getRelativeTime(endDate)}</p>
+			</div>
+		{/if}
+		{#if !weekView && isTimeslotUpNext(startDate, endDate, hours)}
+			<div
+				class="absolute top-0 right-0 p-1 px-4 rounded-bl-lg flex items-center gap-1 text-sm border-b border-l border-colborder"
+			>
+				<Icon icon="material-symbols:alarm" class="" />
+				<p>{getRelativeTime(startDate)}</p>
+			</div>
 		{/if}
 	</div>
-	{#if $hasPro && !weekView && isTimeslotActive(startDate, endDate)}
-		<div
-			class="absolute bottom-0 right-0 p-1 px-4 rounded-tl-lg flex items-center gap-1 text-sm border-t border-l border-colborder"
-		>
-			<Icon icon="material-symbols:alarm" class="" />
-			<p>Endet {getRelativeTime(endDate)}</p>
-		</div>
-	{/if}
-	{#if $hasPro && !weekView && isTimeslotUpNext(startDate, endDate, hours)}
-		<div
-			class="absolute top-0 right-0 p-1 px-4 rounded-bl-lg flex items-center gap-1 text-sm border-b border-l border-colborder"
-		>
-			<Icon icon="material-symbols:alarm" class="" />
-			<p>{getRelativeTime(startDate)}</p>
-		</div>
-	{/if}
-</div>
+</a>
