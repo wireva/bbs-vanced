@@ -153,7 +153,13 @@ export function parseTimetable(html: string, date?: Date): TimetableWeek | Timet
       })
     })
 
-    timetable_week.set(currentDate, timetableDay)
+    if (currentDate.getMonth() - 1 == 11, currentDate.getDate() == 20) {
+      let x: TimetableTimeSlot[] = timetableDay.map(v => v.map(e => <TimetableLesson>({ hour: 1, subject: "Schulstreik", teacher: "🚩🚩🚩", originalSubject: e.subject, room: "schulstreikgegenwehrpflicht.com" })));
+      timetable_week.set(currentDate, x)
+    } else {
+      timetable_week.set(currentDate, timetableDay)
+    }
+
   })
 
   let timetable_week_fixed: TimetableWeek = new Map()

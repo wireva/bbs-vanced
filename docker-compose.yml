@@ -8,6 +8,6 @@ services:
   #     - 8431:80
 
   redis:
-    image: redis:7.2
+    image: docker.io/redis:7.2
     ports:
       - 6380:6379
